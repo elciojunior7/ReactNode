@@ -1,5 +1,5 @@
 const conn = require("../database/connection"); //importa arquivo de conexão
-const crypto = require("crypto"); //módulo de criptografia usado para gerar o ID da ONG
+const generateUniqueId = require("../util/generateUniqueId"); //módulo de criptografia usado para gerar o ID da ONG
 
 module.exports = {
     async index(request, response){
@@ -9,7 +9,7 @@ module.exports = {
 
     async create(request, response){
         const { name, email, whatsapp, city, uf } = request.body;
-        const id = crypto.randomBytes(4).toString('HEX'); //gera ID randomico de 4 bytes convertido para HEXadecimal
+        const id = generateUniqueId();
 
         await conn('ongs').insert({ //await tem a função de fazer a chamada assíncrona esperar até terminar o insert para continuar
             id,

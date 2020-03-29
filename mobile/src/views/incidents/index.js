@@ -11,13 +11,14 @@ import imgLogo from "../../assets/logo.png"; //é importante ter 3 imagens de ta
 
 import styles from "./styles";
 
-export default function Incidents(){
-    const [incidents, setIncidents] = useState([]);
+export default function Incidents() //exporta esta função para ser usada/importada em outro arquivo (routes.js neste caso) como componente
+{
+    const [incidents, setIncidents] = useState([]); //variável empregando conceito de Estado com valor e função de atualização deste valor. Aqui o valor é iniciado como array []
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
     const [loading, setloading] = useState(false);
 
-    const navigation = useNavigation();
+    const navigation = useNavigation(); //faz navegação fora de menu hamburguer ou horizontal, isto é, por um botão por exemplo
 
     async function loadIncidents(){
         if(loading || (total > 0 && incidents.length == total)){
@@ -27,14 +28,14 @@ export default function Incidents(){
         const response = await api.get('/incidents', {
             params: {page}
         });
-        setIncidents([...incidents, ...response.data]); //esta linha anexa um vetor ao outro gerando um novo
+        setIncidents([...incidents, ...response.data]); //esta linha anexa um vetor ao outro gerando um novo vetor
         setTotal(response.headers["x-total-count"]);
 
         setPage(page + 1);
         setloading(false);
     }
 
-    useEffect(() => { 
+    useEffect(() => { //useEffect é disparado quando o componente(Incidents) é chamado na tela do front
         loadIncidents();
     }, [] ); 
 
@@ -43,6 +44,7 @@ export default function Incidents(){
     }
 
     return (
+        //styles serve para estilizar o elemento. Não funciona definir um fontSize em View e herdar em Text, por exemplo, pois não há herança de estilização
         <View style={styles.container}>
             <View style={styles.header}>
                 <Image source={imgLogo} />

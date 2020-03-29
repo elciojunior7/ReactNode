@@ -6,7 +6,7 @@ export default StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 24,
-        paddingTop: Constants.statusBarHeight + 20, 
+        paddingTop: Constants.statusBarHeight + 20, //empurro conteudo no Tamanho da status bar + 20 pixels, para não ficar atrás
     },
 
     header: {

@@ -2,6 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 
+//forma de navegação em React native
 const AppStack = createStackNavigator();
 
 import Incidents from "./views/incidents";

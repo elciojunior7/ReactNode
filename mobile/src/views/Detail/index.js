@@ -16,19 +16,19 @@ export default function Detail(){
         ${Intl.NumberFormat('pt-BR', {style: "currency", currency: "BRL"}).format(incident.value)}`;
 
     function navigateBack(){
-        navigation.goBack();
+        navigation.goBack(); //navega para página anterior
     }
 
     function sendMail(){
-        MailComposer.composeAsync({
+        MailComposer.composeAsync({ //abre app padrão de email (em geral será o gmail no android) com os dados abaixo ja preenchidos em um novo email
             subject: `Herói do Caso: ${incident.title}`,
             recipients: [incident.email],
             body: msg
         })
     }
 
-    function sendWhatsapp(){
-        Linking.openURL(`whatsapp://send?phone=5514981416346&text=${msg}`);
+    function sendWhatsapp(){ //abre whatsapp do contato marcado no incidente com a msg já preenchida
+        Linking.openURL(`whatsapp://send?phone=${incident.whatsapp}&text=${msg}`);
     }
 
     return (
@@ -46,7 +46,7 @@ export default function Detail(){
                 <Text style={styles.incidentProperty}>CASO: </Text>
                 <Text style={styles.incidentValue}>{incident.title}</Text>
 
-                <Text style={styles.incidentProperty}>vALOR: </Text>
+                <Text style={styles.incidentProperty}>VALOR: </Text>
                 <Text style={styles.incidentValue}>{Intl.NumberFormat('pt-BR', {style: "currency", currency: "BRL"}).format(incident.value)}</Text>
             </View>
 
